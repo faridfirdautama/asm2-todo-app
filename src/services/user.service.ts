@@ -1,4 +1,5 @@
 import UserRepository from "../repositories/user.repository";
+import { IUser } from "../entities/user.entity";
 
 const UserService = {
   getUser: async (email: string) => {
@@ -10,6 +11,11 @@ const UserService = {
     }
   },
   createUser: async (user: IUser) => {
-    await UserRepository.createUser(user);
+    try {
+      const newUser = await UserRepository.createUser(user);
+      return newUser;
+    } catch (error) {}
   },
 };
+
+export default UserService;
