@@ -22,8 +22,11 @@ const UserService = {
   userRegister: async (user: IUser) => {
     try {
       // validation
-      if (!user.email || user.password.length < 8) {
-        return "Email and password are required, password should > 8 characters";
+      if (!user.email || !user.password) {
+        return "Email and password are required";
+      }
+      if (user.password.length < 8) {
+        return "Password should minimum > 8 characters";
       }
 
       // collision
@@ -33,7 +36,7 @@ const UserService = {
       }
 
       // password hashing
-      user.password = await bcrypt.hash(user.password, 10);
+      user.password = await bcrypt.hash(user.password, 13);
 
       // return response
       const newUser = await UserService.createUser(user);
