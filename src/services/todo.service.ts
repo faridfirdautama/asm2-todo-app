@@ -15,7 +15,7 @@ const TodoService = {
       const todo = await TodoRepository.getTodo(id);
       return todo;
     } catch (error) {
-      console.log(`Service error: #{error}`);
+      console.log(`Service error: ${error}`);
     }
   },
   createTodo: async (todo: ITodo) => {
@@ -23,7 +23,7 @@ const TodoService = {
       const newTodo = await TodoRepository.createTodo(todo);
       return newTodo;
     } catch (error) {
-      console.log(`Service error: #{error}`);
+      console.log(`Service error: ${error}`);
     }
   },
   updateTodo: async (id: string, todo: ITodo) => {
@@ -31,14 +31,14 @@ const TodoService = {
       const updatedTodo = await TodoRepository.updateTodo(id, todo);
       return updatedTodo;
     } catch (error) {
-      console.log(`Service error: #{error}`);
+      console.log(`Service error: ${error}`);
     }
   },
   deleteTodo: async (id: string) => {
     try {
       await TodoRepository.deleteTodo(id);
     } catch (error) {
-      console.log(`Service error: #{error}`);
+      console.log(`Service error: ${error}`);
     }
   },
 };
