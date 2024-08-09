@@ -15,7 +15,7 @@ const TodoController = {
     const newTodo = await TodoService.createTodo({ title, todos });
     return res
       .status(201)
-      .json({ message: "Todo created successfully", data: newTodo });
+      .json({ message: "Todo created successfully", data: { title, todos } });
   },
   handleUpdateTodo: async (req: Request, res: Response) => {
     const todoId = req.params.id;
