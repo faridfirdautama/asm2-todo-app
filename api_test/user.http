@@ -3,7 +3,16 @@ POST http://localhost:8000/api/v1/register
 content-type: application/json
 
 {
-  "name": "Farid",
-  "email": "farid@me.com",
-  "password": "farid123"
+  "name": "Dito",
+  "email": "dito@me.com",
+  "password": "dito123dito"
+}
+
+### User Login
+POST http://localhost:8000/api/v1/login
+content-type: application/json
+
+{
+  "email": "dito@me.com",
+  "password": "dito123dito"
 }
