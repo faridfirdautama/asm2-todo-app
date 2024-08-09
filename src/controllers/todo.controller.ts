@@ -2,7 +2,7 @@ import TodoService from "../services/todo.service";
 import { Request, Response } from "express";
 
 const TodoController = {
-  handleGetAllTodos: async (res: Response) => {
+  handleGetAllTodos: async (req: Request, res: Response) => {
     const todos = await TodoService.getAllTodos();
     return res.status(200).json({ message: "List of Todolist", data: todos });
   },
