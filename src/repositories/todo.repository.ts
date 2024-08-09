@@ -15,7 +15,7 @@ const TodoRepository = {
       const todo = await Todos.findById(id);
       return todo;
     } catch (error) {
-      console.log(`Repository error: #{error}`);
+      console.log(`Repository error: ${error}`);
     }
   },
   createTodo: async (todo: ITodo) => {
@@ -23,7 +23,7 @@ const TodoRepository = {
       const newTodo = new Todos(todo);
       await newTodo.save();
     } catch (error) {
-      console.log(`Repository error: #{error}`);
+      console.log(`Repository error: ${error}`);
     }
   },
   updateTodo: async (id: string, todo: ITodo) => {
@@ -31,14 +31,14 @@ const TodoRepository = {
       const updatedTodo = await Todos.findByIdAndUpdate(id, todo);
       return updatedTodo;
     } catch (error) {
-      console.log(`Repository error: #{error}`);
+      console.log(`Repository error: ${error}`);
     }
   },
   deleteTodo: async (id: string) => {
     try {
       await Todos.findByIdAndDelete(id);
     } catch (error) {
-      console.log(`Repository error: #{error}`);
+      console.log(`Repository error: ${error}`);
     }
   },
 };

@@ -7,7 +7,7 @@ const UserRepository = {
       const user = await TodoUser.findOne({ email });
       return user;
     } catch (error) {
-      console.log(`Repository error: #{error}`);
+      console.log(`Repository error: ${error}`);
     }
   },
   createUser: async (user: IUser) => {
@@ -15,7 +15,7 @@ const UserRepository = {
       const newUser = new TodoUser(user);
       await newUser.save();
     } catch (error) {
-      console.log(`Repository error: #{error}`);
+      console.log(`Repository error: ${error}`);
     }
   },
 };
