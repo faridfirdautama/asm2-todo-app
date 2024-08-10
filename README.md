@@ -1,6 +1,6 @@
 # TodoList Web App
 ## CRUD app with schema Token Rotation ( access & refresh token ).
-Created for Devscale Assignment #3 (backend only)
+- Created for Devscale Assignment #3 (backend only)
 
 
 # How to use
