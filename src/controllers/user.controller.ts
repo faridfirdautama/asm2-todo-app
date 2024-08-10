@@ -33,6 +33,13 @@ const UserController = {
       .status(200)
       .json({ message: "You are successfully logged in" });
   },
+  handleLogout: async (req: Request, res: Response) => {
+    return res
+      .clearCookie("accessToken")
+      .clearCookie("refreshToken")
+      .status(200)
+      .json({ message: "Logout successfully" });
+  },
 };
 
 export default UserController;
