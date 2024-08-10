@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
   "title": "Get milk",
-  "todos": "Get milk from the store",
+  "todos": "Get milk from the store"
 }
 
 ### Update todo
