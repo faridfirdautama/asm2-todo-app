@@ -34,6 +34,8 @@ const UserController = {
       .json({ message: "You are successfully logged in" });
   },
   handleLogout: async (req: Request, res: Response) => {
+    const { refreshToken } = req.cookies;
+    await UserService.userLogout(refreshToken);
     return res
       .clearCookie("accessToken")
       .clearCookie("refreshToken")
