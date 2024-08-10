@@ -5,8 +5,8 @@
 
 # How to use
 1. Clone this repo
-2. Run: pnpm install
-3. Create .env file
+2. Run `pnpm install`
+3. Create `.env` file
 ```
 MONGO_URI_TODOLIST=mongodb://user:password@127.0.0.1:27017/test
 PORT=
