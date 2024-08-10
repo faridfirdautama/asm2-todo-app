@@ -17,9 +17,9 @@ JWT_REFRESH_KEY=
 
 
 # Endpoints
-Example: 
-- `POST /api/v1/register`
-- `POST /api/v1/login`
+- `POST /api/v1/user`
+- `POST /api/v1/user/login`
+- `POST /api/v1/user/logout`
 - `GET /api/v1/todos`
 - ```
   POST /api/v1/todos
