@@ -1,5 +1,5 @@
 import UserRepository from "../repositories/user.repository";
-import { IUser, IUserLoginRequest } from "../entities/user.entity";
+import { IUser, IUserLoginRequest, IAuth } from "../entities/user.entity";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -19,6 +19,22 @@ const UserService = {
     try {
       const newUser = await UserRepository.createUser(user);
       return newUser;
+    } catch (error) {
+      console.log(`Service error: ${error}`);
+    }
+  },
+  createAuth: async (auth: IAuth) => {
+    try {
+      const newAuth = await UserRepository.createAuth(auth);
+      return newAuth;
+    } catch (error) {
+      console.log(`Service error: ${error}`);
+    }
+  },
+  getAuth: async (refreshToken: string) => {
+    try {
+      const auth = await UserRepository.getAuth(refreshToken);
+      return auth;
     } catch (error) {
       console.log(`Service error: ${error}`);
     }
@@ -94,8 +110,19 @@ const UserService = {
           expiresIn: "7d",
         },
       );
+
+      // save refreshToken to DB
+      const userId = getUser._id.toString();
+      await UserService.createAuth({ userId, refreshToken });
       const result = { accessToken, refreshToken };
       return result;
+    } catch (error) {
+      console.log(`Service error: ${error}`);
+    }
+  },
+  userLogout: async (refreshToken: string) => {
+    try {
+      await UserService.getAuth(refreshToken);
     } catch (error) {
       console.log(`Service error: ${error}`);
     }
