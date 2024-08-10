@@ -35,6 +35,13 @@ const UserRepository = {
       console.log(`Repository error: ${error}`);
     }
   },
+  deleteAuth: async (refreshToken: string) => {
+    try {
+      await Auth.deleteOne({ refreshToken });
+    } catch (error) {
+      console.log(`Repository error: ${error}`);
+    }
+  },
 };
 
 export default UserRepository;
