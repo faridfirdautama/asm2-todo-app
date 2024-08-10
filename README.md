@@ -1,7 +1,7 @@
 # TodoList Web App
 ## CRUD app with schema Token Rotation ( access & refresh token ).
 - Created for Devscale Assignment #3 (backend only)
-
+<br />
 
 # How to use
 1. Clone this repo
@@ -13,8 +13,8 @@ PORT=
 JWT_ACCESS_KEY=
 JWT_REFRESH_KEY=
 ```
-4. Run: pnpm dev
-
+4. Run `pnpm dev`
+<br />
 
 # Endpoints
 - `POST /api/v1/user`
@@ -29,8 +29,8 @@ JWT_REFRESH_KEY=
     "todos": "Doing something..."
   }
   ```
-### All detail http script located at `api_test` folder
-
+- All detail http script located at `api_test` folder
+<br />
 
 # Basic logic
 ### # Unregistered user cannot access Todolist App
