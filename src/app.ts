@@ -3,10 +3,12 @@ import dotenv from "dotenv";
 import { connectDB } from "./dB/db.connect";
 import { todoRouter } from "./routes/todo.route";
 import { userRegisterRoute, userLoginRoute } from "./routes/user.route";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 connectDB();
 
 // Routes
