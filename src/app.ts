@@ -2,7 +2,11 @@ import express from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./dB/db.connect";
 import { todoRouter } from "./routes/todo.route";
-import { userRegisterRoute, userLoginRoute } from "./routes/user.route";
+import {
+  userRegisterRoute,
+  userLoginRoute,
+  userLogoutRoute,
+} from "./routes/user.route";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -15,6 +19,7 @@ connectDB();
 app.use("/api/v1/todos", todoRouter);
 app.use("/api/v1/register", userRegisterRoute);
 app.use("/api/v1/login", userLoginRoute);
+app.use("/api/v1/logout", userLogoutRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server listening on port ${process.env.PORT}`);

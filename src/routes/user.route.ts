@@ -7,4 +7,7 @@ userRegisterRoute.post("/", UserController.handleRegister);
 const userLoginRoute = express.Router();
 userLoginRoute.post("/", UserController.handleLogin);
 
-export { userRegisterRoute, userLoginRoute };
+const userLogoutRoute = express.Router();
+userLogoutRoute.get("/", UserController.handleLogout);
+
+export { userRegisterRoute, userLoginRoute, userLogoutRoute };
