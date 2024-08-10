@@ -8,6 +8,6 @@ const userLoginRoute = express.Router();
 userLoginRoute.post("/", UserController.handleLogin);
 
 const userLogoutRoute = express.Router();
-userLogoutRoute.get("/", UserController.handleLogout);
+userLogoutRoute.post("/", UserController.handleLogout);
 
 export { userRegisterRoute, userLoginRoute, userLogoutRoute };
