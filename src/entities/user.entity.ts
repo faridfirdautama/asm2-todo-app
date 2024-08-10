@@ -9,4 +9,9 @@ interface IUserLoginRequest {
   password: string;
 }
 
-export { IUser, IUserLoginRequest };
+interface IAuth {
+  userId: string;
+  refreshToken: string;
+}
+
+export { IUser, IUserLoginRequest, IAuth };
