@@ -120,6 +120,13 @@ const UserService = {
       console.log(`Service error: ${error}`);
     }
   },
+  userLogout: async (refreshToken: string) => {
+    try {
+      await UserService.getAuth(refreshToken);
+    } catch (error) {
+      console.log(`Service error: ${error}`);
+    }
+  },
 };
 
 export default UserService;
