@@ -2,19 +2,24 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import UserService from "../services/user.service";
 
-export async function checkAuth(
+export const checkAuth = async (
   req: Request,
   res: Response,
   next: NextFunction,
-) {
+) => {
   const { accessToken, refreshToken } = req.cookies;
 
-  // Access token exist ?
+  // Screening both tokens
+  if (!accessToken || !refreshToken) {
+    return res.status(401).json({ message: "Unauthorized, Login required!" });
+  }
+
+  // Screening accessToken
   if (accessToken) {
     try {
       jwt.verify(accessToken, process.env.JWT_ACCESS_KEY as string);
     } catch (error) {
-      // Refresh token exist ?
+      // Screening refreshToken
       if (!refreshToken) {
         return res.status(401).json({ message: "Unauthorized" });
       }
@@ -24,7 +29,7 @@ export async function checkAuth(
         jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY as string);
         const validRefTok = await UserService.getAuth(refreshToken);
 
-        // Exist
+        // Screening refreshToken on Db
         if (!validRefTok) {
           return res.status(401).json({ message: "Unauthorized" });
         }
@@ -53,4 +58,4 @@ export async function checkAuth(
     }
   }
   next();
-}
+};
