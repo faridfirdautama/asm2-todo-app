@@ -16,3 +16,6 @@ content-type: application/json
   "email": "dito@me.com",
   "password": "dito123dito"
 }
+
+### User Logout
+POST http://localhost:8000/api/v1/logout

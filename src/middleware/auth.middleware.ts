@@ -2,11 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import UserService from "../services/user.service";
 
-export const checkAuth = async (
+export async function checkAuth(
   req: Request,
   res: Response,
   next: NextFunction,
-) => {
+) {
   const { accessToken, refreshToken } = req.cookies;
 
   // Access token exist ?
@@ -53,4 +53,4 @@ export const checkAuth = async (
     }
   }
   next();
-};
+}
