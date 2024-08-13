@@ -6,8 +6,8 @@ COPY . .
 
 RUN npm install -g pnpm
 RUN pnpm setup
-RUN pnpm install -g typescript
-RUN pnpm install
+RUN pnpm i typescript
+RUN pnpm i
 RUN tsc
 
 EXPOSE 8000
