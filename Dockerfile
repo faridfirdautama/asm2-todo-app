@@ -4,8 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install
-RUN npm install pnpm
+RUN npm install -g pnpm
 RUN pnpm install
 RUN tsc
 
