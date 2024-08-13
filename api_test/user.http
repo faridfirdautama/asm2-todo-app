@@ -1,5 +1,5 @@
 ### User register
-POST http://localhost:8000/api/v1/user
+POST http://103.82.92.144:8000/api/v1/user
 content-type: application/json
 
 {
@@ -9,7 +9,7 @@ content-type: application/json
 }
 
 ### User Login
-POST http://localhost:8000/api/v1/user/login
+POST http://103.82.92.144:8000/api/v1/user/login
 content-type: application/json
 
 {
@@ -18,4 +18,4 @@ content-type: application/json
 }
 
 ### User Logout
-POST http://localhost:8000/api/v1/user/logout
+POST http://103.82.92.144:8000/api/v1/user/logout
