@@ -1,4 +1,4 @@
-interface IUser {
+interface IUserRegisterRequest {
   name: string;
   email: string;
   password: string;
@@ -14,4 +14,4 @@ interface IAuth {
   refreshToken: string;
 }
 
-export { IUser, IUserLoginRequest, IAuth };
+export { IUserRegisterRequest, IUserLoginRequest, IAuth };

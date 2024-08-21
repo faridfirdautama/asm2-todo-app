@@ -1,5 +1,9 @@
 import UserRepository from "../repositories/user.repository";
-import { IUser, IUserLoginRequest, IAuth } from "../entities/user.entity";
+import {
+  IUserRegisterRequest,
+  IUserLoginRequest,
+  IAuth,
+} from "../model/entities/user.entity";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -15,7 +19,7 @@ const UserService = {
       console.log(`Service error: ${error}`);
     }
   },
-  createUser: async (user: IUser) => {
+  createUser: async (user: IUserRegisterRequest) => {
     try {
       const newUser = await UserRepository.createUser(user);
       return newUser;
@@ -39,7 +43,7 @@ const UserService = {
       console.log(`Service error: ${error}`);
     }
   },
-  userRegister: async (user: IUser) => {
+  userRegister: async (user: IUserRegisterRequest) => {
     try {
       // validation
       if (!user.email || !user.password) {

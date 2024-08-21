@@ -1,5 +1,5 @@
 import { Todos } from "../model/todo.schema";
-import { ITodo } from "../entities/todo.entity";
+import { ITodo } from "../model/entities/todo.entity";
 
 const TodoRepository = {
   getAllTodos: async () => {

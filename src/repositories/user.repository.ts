@@ -1,6 +1,6 @@
 import { TodoUser } from "../model/user.schema";
 import { Auth } from "../model/auth.schema";
-import { IUser, IAuth } from "../entities/user.entity";
+import { IUserRegisterRequest, IAuth } from "../model/entities/user.entity";
 
 const UserRepository = {
   getUser: async (email: string) => {
@@ -11,7 +11,7 @@ const UserRepository = {
       console.log(`Repository error: ${error}`);
     }
   },
-  createUser: async (user: IUser) => {
+  createUser: async (user: IUserRegisterRequest) => {
     try {
       const newUser = new TodoUser(user);
       await newUser.save();
