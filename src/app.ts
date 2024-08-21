@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import { connectDB } from "./dB/db.connect";
+import { connectDB } from "./utils/dB/db.connect";
 import { todoRouter } from "./routes/todo.route";
 import { userRouter } from "./routes/user.route";
 import cookieParser from "cookie-parser";
