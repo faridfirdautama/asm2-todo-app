@@ -8,6 +8,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { userValidationSchema } from "../utils/zod/user.zod";
+import { ZodError } from "zod";
 
 dotenv.config();
 
@@ -73,14 +74,8 @@ const UserService = {
       // validation
       const validation = userValidationSchema.safeParse(user);
       if (!validation.success) {
-        return validation.error.issues; //.map((e) => e.message);
+        return { message: validation.error.issues.map((e) => e.message) };
       }
-      //if (!user.email || !user.password) {
-      //  return "Email and password are required";
-      //}
-      //if (user.password.length < 8) {
-      //  return "Password should minimum > 8 characters";
-      //}
 
       // record check
       const getUser = await UserService.getUser(user.email);
@@ -124,7 +119,7 @@ const UserService = {
       // save refreshToken to DB
       const userId = getUser._id.toString();
       await UserService.createAuth({ userId, refreshToken });
-      return { data: { accessToken, refreshToken } };
+      return { accessToken, refreshToken };
     } catch (error) {
       console.log(`Service error: ${error}`);
     }

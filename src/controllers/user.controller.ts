@@ -20,9 +20,10 @@ const UserController = {
       password,
     });
 
-    //console.log(`Results: ${results}`);
-    //console.log(`Type: ${typeof results}`);
-    if (typeof results === "object") {
+    if (
+      results?.accessToken === undefined ||
+      results?.refreshToken === undefined
+    ) {
       return res.status(400).json({ results });
     }
 
