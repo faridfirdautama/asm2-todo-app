@@ -17,11 +17,16 @@ JWT_REFRESH_KEY=
 <br />
 
 # Endpoints
-- `POST /api/v1/user`
-- `POST /api/v1/user/login`
-- `POST /api/v1/user/logout`
-- `GET /api/v1/todos`
-- ```
+### Register
+```POST /api/v1/user```
+### Login
+```POST /api/v1/user/login```
+### Logout
+```POST /api/v1/user/logout```
+### All todo list
+```GET /api/v1/todos```
+### Create todo
+```
   POST /api/v1/todos
   Content-type:application-json
   {
