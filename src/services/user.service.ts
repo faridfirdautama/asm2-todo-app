@@ -1,8 +1,14 @@
 import UserRepository from "../repositories/user.repository";
-import { IUser, IUserLoginRequest, IAuth } from "../entities/user.entity";
+import {
+  IUserRegisterRequest,
+  IUserLoginRequest,
+  IAuth,
+} from "../model/entities/user.entity";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { userValidationSchema } from "../utils/zod/user.zod";
+import { ZodError } from "zod";
 
 dotenv.config();
 
@@ -15,7 +21,7 @@ const UserService = {
       console.log(`Service error: ${error}`);
     }
   },
-  createUser: async (user: IUser) => {
+  createUser: async (user: IUserRegisterRequest) => {
     try {
       const newUser = await UserRepository.createUser(user);
       return newUser;
@@ -39,20 +45,18 @@ const UserService = {
       console.log(`Service error: ${error}`);
     }
   },
-  userRegister: async (user: IUser) => {
+  userRegister: async (user: IUserRegisterRequest) => {
     try {
       // validation
-      if (!user.email || !user.password) {
-        return "Email and password are required";
-      }
-      if (user.password.length < 8) {
-        return "Password should minimum > 8 characters";
+      const validation = userValidationSchema.safeParse(user);
+      if (!validation.success) {
+        return validation.error.issues.map((e) => e.message);
       }
 
       // collision
       const emailExist = await UserService.getUser(user.email);
       if (emailExist) {
-        return "Email already exist";
+        return { message: "Email already exist" };
       }
 
       // password hashing
@@ -68,17 +72,18 @@ const UserService = {
   userLogin: async (user: IUserLoginRequest) => {
     try {
       // validation
-      if (!user.email || !user.password) {
-        return "Email and password are required";
-      }
-      if (user.password.length < 8) {
-        return "Password should minimum > 8 characters";
+      const validation = userValidationSchema.safeParse(user);
+      if (!validation.success) {
+        return { message: validation.error.issues.map((e) => e.message) };
       }
 
       // record check
       const getUser = await UserService.getUser(user.email);
       if (!getUser) {
-        return "System will sent reset email link to your associated email, if the email found registered";
+        return {
+          message:
+            "System will sent reset email link to your associated email, if the email found registered",
+        };
       }
 
       // password matching
@@ -87,7 +92,7 @@ const UserService = {
         getUser.password as string,
       );
       if (!isMatch) {
-        return "Invalid credentials";
+        return { message: "Invalid credentials" };
       }
 
       // create accessToken & refreshToken
@@ -114,8 +119,7 @@ const UserService = {
       // save refreshToken to DB
       const userId = getUser._id.toString();
       await UserService.createAuth({ userId, refreshToken });
-      const result = { accessToken, refreshToken };
-      return result;
+      return { accessToken, refreshToken };
     } catch (error) {
       console.log(`Service error: ${error}`);
     }

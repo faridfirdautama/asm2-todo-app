@@ -4,9 +4,9 @@ import UserService from "../services/user.service";
 const UserController = {
   handleRegister: async (req: Request, res: Response) => {
     const { name, email, password } = req.body;
-    const messages = await UserService.userRegister({ name, email, password });
-    if (typeof messages === "string") {
-      return res.status(400).json({ messages });
+    const results = await UserService.userRegister({ name, email, password });
+    if (typeof results === "object") {
+      return res.status(400).json({ results });
     }
 
     return res
@@ -15,19 +15,23 @@ const UserController = {
   },
   handleLogin: async (req: Request, res: Response) => {
     const { email, password } = req.body;
-    const messages = await UserService.userLogin({
+    const results = await UserService.userLogin({
       email,
       password,
     });
-    if (typeof messages === "string") {
-      return res.status(400).json({ messages });
+
+    if (
+      results?.accessToken === undefined ||
+      results?.refreshToken === undefined
+    ) {
+      return res.status(400).json({ results });
     }
 
     return res
-      .cookie("accessToken", messages?.accessToken, {
+      .cookie("accessToken", results?.accessToken, {
         httpOnly: true,
       })
-      .cookie("refreshToken", messages?.refreshToken, {
+      .cookie("refreshToken", results?.refreshToken, {
         httpOnly: true,
       })
       .status(200)

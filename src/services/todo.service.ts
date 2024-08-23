@@ -1,5 +1,5 @@
 import TodoRepository from "../repositories/todo.repository";
-import { ITodo } from "../entities/todo.entity";
+import { ITodo } from "../model/entities/todo.entity";
 
 const TodoService = {
   getAllTodos: async () => {
